@@ -1,0 +1,9 @@
+extends ../layouts/common.pug
+
+block content
+    .card.text-white.bg-dark.mb-3(style='max-width: 18rem;')
+        .card-header User info
+        .card-body
+            p.card-text Name: #{user.name}
+            span &nbsp;
+            |Phone: #{user.phone}

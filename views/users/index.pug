@@ -1,0 +1,46 @@
+extends ../layouts/common.pug
+
+block content
+        
+    .d-flex.align-items-center
+        h1 
+            span.mr-2 User
+            a.btn.btn-primary(href='/users/create') New
+
+        form.ml-auto(action="/users/search", method="GET")
+            input(type="text", name="q" id="searchInput")
+            button.btn.btn-info Search
+
+
+    table.table
+        tr
+            th Avatar
+            th Name
+            th Phone
+            th Edit
+            th View Profile User
+            th Delete
+        each user in users
+            tr
+                td
+                    img(src=user.avatar style="width: 34")
+
+                td= user.name
+                td= user.phone
+                td
+                    a.btn.btn-danger(href="/users/edit/" + user.id) Edit
+                td 
+                    a.btn.btn-info(href="/users/" + user.id) View
+                td 
+                    a.btn.btn-danger(href="/users/delete/" + user.id) Delete
+
+
+
+
+    script.
+        var input = document.getElementById('searchInput');
+        input.value = sessionStorage.getItem('draft');
+        input.addEventListener('change', updateSessionStorage);
+        function updateSessionStorage(){
+            sessionStorage.setItem('draft', input.value)
+        }
