@@ -30,21 +30,8 @@ module.exports.get = (req,res) =>{
 }
 // check user post information
 module.exports.postCreate= (req,res) =>{
+   // tạo người dùngs
     req.body.id = shortid.generate();
-    const errors = [];
-    if(!req.body.name){
-      errors.push('Name is required!');
-    };
-    if(!req.body.phone){
-        errors.push('phone is required!');
-    }
-    if(errors.length){
-        res.render('users/create',{
-            errors: errors,
-            value: req.body
-        });
-        return;
-    }
     db.get('users').push(req.body).write()
     res.redirect('/users');
    };
